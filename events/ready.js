@@ -1,5 +1,5 @@
 const { Event } = require('klasa');
-const { BOT_ACTIVITY } = require('../config.json');
+const { BOT_ACTIVITY } = require('../config.js');
 
 module.exports = class extends Event {
 

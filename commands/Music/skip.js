@@ -1,5 +1,5 @@
 const { Command, RichMenu } = require('klasa');
-const { ANY_SKIP } = require('../../config.json');
+const { ANY_SKIP } = require('../../config.js');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = class extends Command {

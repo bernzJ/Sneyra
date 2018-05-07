@@ -1,6 +1,6 @@
 const klasa = require('klasa');
 const Music = require('./lib/Music');
-const config = require('./config.json');
+const config = require('./config.js');
 
 klasa.Client.defaultPermissionLevels
     .add(5, (client, msg) => msg.member && msg.guild.configs.dj && msg.member.roles.has(msg.guild.configs.dj), { fetch: true })

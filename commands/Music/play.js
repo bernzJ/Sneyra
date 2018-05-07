@@ -2,7 +2,7 @@ const { Command, RichMenu } = require('klasa');
 
 const snekfetch = require('snekfetch');
 const { MessageEmbed } = require('discord.js');
-const { GOOGLE_SEARCH } = require('../../config.json');
+const { GOOGLE_SEARCH } = require('../../config.js');
 const fetchURL = url => snekfetch.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${url}&key=${GOOGLE_SEARCH}`)
     .then(result => result.body);
 
