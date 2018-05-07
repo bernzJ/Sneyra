@@ -29,7 +29,7 @@ class Sneyra extends klasa.Client {
             cmdEditing: true,
             console: { useColor: true },
             pieceDefaults: { commands: { deletable: true } },
-            prefix: 'm!',
+            prefix: '!',
             regexPrefix: /^(hey )?sneyra(,|!)/i
         });
 

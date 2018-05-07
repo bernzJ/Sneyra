@@ -1,4 +1,6 @@
-const { Command } = require('klasa');
+const { Command, RichMenu } = require('klasa');
+const { ANY_SKIP } = require('../../config.json');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -17,6 +19,10 @@ module.exports = class extends Command {
     async run(msg, [force]) {
         const { music } = msg.guild;
 
+        if (ANY_SKIP === true) {
+            return this.skip(msg, music);
+        }
+
         if (music.voiceChannel.members.size > 4) {
             if (force) {
                 const hasPermission = await msg.hasAtLeastPermissionLevel(5);
@@ -27,12 +33,23 @@ module.exports = class extends Command {
             }
         }
 
-        await msg.send(`⏭ Skipped ${music.queue[0].title}`);
-        music.skip(true);
+        return this.skip(msg, music);
+    }
+
+    async skip(msg, musicInterface) {
+        const embed = new RichMenu(new MessageEmbed()
+            .setColor('#2661a5')
+            .setTitle(`Skipped ${musicInterface.queue[0].title} ⏭️`)
+        );
+        embed.emojis = [];
+        embed.footered = true;
+        await embed.run(await msg.send('Loading ..'));
+        musicInterface.skip(true);
         return null;
     }
 
     handleSkips(musicInterface, user) {
+        if (ANY_SKIP === true) return true;
         if (!musicInterface.queue[0].skips) musicInterface.queue[0].skips = new Set();
         if (musicInterface.queue[0].skips.has(user)) return 'You have already voted to skip this song.';
         musicInterface.queue[0].skips.add(user);
